@@ -106,6 +106,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen>
 
       setState(() {
         isParticipating = newState;
+        numberParticipants += newState? 1 : -1;
       });
     } catch (_) {
       ScaffoldMessenger.of(context).showSnackBar(
