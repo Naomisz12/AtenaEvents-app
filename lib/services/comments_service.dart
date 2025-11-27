@@ -38,4 +38,33 @@ class CommentsService {
 
     return jsonDecode(res.body);
   }
+
+  Future<void> updateComment({
+    required int commentId,
+    required String newText,
+  }) async {
+    final res = await http.put(
+      Uri.parse("$baseUrl/comments/$commentId"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "text": newText,
+      }),
+    );
+
+    if (res.statusCode != 200) {
+      throw Exception("Erro ao atualizar comentário");
+    }
+  }
+
+  Future<void> deleteComment({
+    required int commentId,
+  }) async {
+    final res = await http.delete(
+      Uri.parse("$baseUrl/comments/$commentId"),
+    );
+
+    if (res.statusCode != 200 && res.statusCode != 204) {
+      throw Exception("Erro ao deletar comentário");
+    }
+  }
 }
