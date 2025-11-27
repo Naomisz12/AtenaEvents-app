@@ -1,4 +1,5 @@
 import 'package:atena_events_app/providers/user_provider.dart';
+import 'package:atena_events_app/services/notification_service.dart';
 import 'package:atena_events_app/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ import 'router/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.init();
 
   final prefs = await SharedPreferences.getInstance();
   final userId = prefs.getInt('userId');

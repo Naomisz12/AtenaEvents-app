@@ -1,4 +1,5 @@
 import 'package:atena_events_app/services/event_service.dart';
+import 'package:atena_events_app/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -130,6 +131,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
           type: _selectedBadge!.trim(),
           description: _description.trim(),
           date: _selectedDate!.toIso8601String().split('.').first,
+        );
+        
+        await NotificationService.show(
+          title: "Evento criado!",
+          body: 'ID: ${result['id']} — ${result['title']}',
+          id: result['id'],
         );
 
         if (!mounted) return;
